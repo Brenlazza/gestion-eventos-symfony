@@ -1,0 +1,39 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block title %}
+    Eventos
+{% endblock %}
+
+{% block contenido %}
+
+    <section class="py-4">
+
+        <h1 class="mb-4">Todos los eventos</h1>
+
+        <div class="row g-4">
+
+            {% for evento in eventos %}
+
+                <div class="col-12 col-md-6">
+
+                    {% include 'evento/_card.html.twig' with {
+                        evento: evento
+                    } %}
+
+                </div>
+
+            {% else %}
+
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No hay eventos disponibles.
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endblock %}

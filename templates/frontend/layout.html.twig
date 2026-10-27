@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold"
+               href="{{ path('app_portada') }}">
+                Gestión de Eventos
+            </a>
+
+            <div class="navbar-nav flex-row flex-wrap gap-3">
+                <a class="nav-link"
+                   href="{{ path('app_portada') }}">
+                    Inicio
+                </a>
+
+                <a class="nav-link"
+                   href="{{ path('app_eventos') }}">
+                    Eventos
+                </a>
+
+                <a class="nav-link"
+                   href="{{ path('app_disertantes') }}">
+                    Disertantes
+                </a>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row g-4">
+
+            <main class="col-12 col-lg-8">
+                {% block contenido %}{% endblock %}
+            </main>
+
+            <aside class="col-12 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {% block lateral %}{% endblock %}
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+{% endblock %}

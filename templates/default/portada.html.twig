@@ -1,0 +1,67 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block contenido %}
+
+    <div class="bg-light rounded-3 p-4 mb-4 shadow-sm">
+    <h1 class="display-6 fw-bold">
+        Bienvenidos a Gestión de Eventos
+    </h1>
+
+    <p class="lead text-secondary mb-0">
+        Descubrí conferencias, talleres y jornadas.
+        Conocé nuestras próximas actividades y encontrá
+        el evento que más te interese.
+    </p>
+</div>
+
+    <section class="py-4">
+
+        <h2 class="mb-4">Próximos eventos</h2>
+
+        <div class="row g-4">
+
+            {% for evento in eventosCol1 %}
+                <div class="col-12 col-md-6">
+                    {% include 'evento/_card.html.twig' with {
+                        evento: evento
+                    } %}
+                </div>
+            {% endfor %}
+
+            {% for evento in eventosCol2 %}
+                <div class="col-12 col-md-6">
+                    {% include 'evento/_card.html.twig' with {
+                        evento: evento
+                    } %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endblock %}
+
+{% block lateral %}
+
+    <h3 class="h5 fw-bold mb-3">
+        ¿Falta algún evento?
+    </h3>
+
+    <p class="text-secondary">
+        Estamos preparando nuevas conferencias,
+        talleres y jornadas para nuestra comunidad.
+    </p>
+
+    <div class="alert alert-info mb-3" role="alert">
+        ¡Próximamente tendremos más actividades!
+    </div>
+
+    <a href="{{ path('app_eventos') }}"
+       class="btn btn-outline-primary w-100">
+        Ver todos los eventos
+    </a>
+
+    {{ parent() }}
+
+{% endblock %}

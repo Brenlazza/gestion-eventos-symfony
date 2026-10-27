@@ -1,0 +1,107 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% block title %}Disertantes{% endblock %}
+
+{% block contenido %}
+
+    <section class="py-4">
+
+        <h1 class="mb-4">Nuestros disertantes</h1>
+
+        <div class="row g-4">
+
+            {% for disertante in disertantes %}
+
+                <div class="col-12 col-md-6">
+
+                    <article class="card h-100 shadow-sm border-0">
+
+                        <div class="card-body">
+
+                            <span class="badge bg-primary mb-3">
+                                Disertante
+                            </span>
+
+                            <h2 class="card-title h5">
+                                {{ disertante.nombreCompleto }}
+                            </h2>
+
+                            <p class="text-secondary">
+                                {{ disertante.especialidad ?? 'Sin especialidad' }}
+                            </p>
+
+                            <p class="card-text">
+                                {{ disertante.biografia ?: 'Biografía no disponible.' }}
+                            </p>
+
+                            <h3 class="h6 mt-4">
+                                Eventos que imparte
+                            </h3>
+
+                            <ul class="list-group list-group-flush mb-3">
+
+                                {% for evento in disertante.eventos %}
+                                    <li class="list-group-item px-0">
+                                        <a href="{{ path('app_evento_detalle', {
+                                            'slug': evento.slug
+                                        }) }}">
+                                            {{ evento.titulo }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item px-0 text-muted">
+                                        No imparte ningún evento.
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+                            {% if disertante.twitter or disertante.linkedin %}
+                                <p class="fw-semibold mb-2">
+                                    Más información
+                                </p>
+
+                                {% if disertante.twitter %}
+                                    <a href="{{ disertante.twitter }}"
+                                       class="btn btn-outline-secondary btn-sm">
+                                        Twitter / X
+                                    </a>
+                                {% endif %}
+
+                                {% if disertante.linkedin %}
+                                    <a href="{{ disertante.linkedin }}"
+                                       class="btn btn-outline-secondary btn-sm">
+                                        LinkedIn
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+
+                        </div>
+
+                        <div class="card-footer bg-white border-0 pb-3">
+                            <a href="{{ path('app_disertante_detalle', {
+                                'id': disertante.id
+                            }) }}" class="btn btn-primary w-100">
+                                Ver disertante
+                            </a>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            {% else %}
+
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No hay disertantes cargados.
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endblock %}

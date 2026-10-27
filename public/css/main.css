@@ -1,0 +1,15 @@
+/* Estilos generales del Sistema de Gestión de Eventos */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Espaciado del contenido principal */
+main {
+    min-height: 70vh;
+}
+
+/* Tarjetas de eventos */
+.evento-card {
+    margin-bottom: 20px;
+}

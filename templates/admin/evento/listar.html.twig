@@ -1,0 +1,119 @@
+{% extends 'admin/layout-admin.html.twig' %}
+
+{% block title %}
+    Gestión de Eventos
+{% endblock %}
+
+{% block contenido %}
+
+    {% for mensaje in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ mensaje }}
+        </div>
+    {% endfor %}
+
+    <h1>Gestión de Eventos</h1>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+        <tr>
+            <th>Fecha/Hora</th>
+            <th>Título</th>
+            <th>Idioma</th>
+            <th>Inscriptos</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% for evento in eventos %}
+
+            <tr>
+
+                <td>
+                    {{ evento.fecha|date('d/m/Y') }}
+                    {{ evento.hora|date('H:i') }}
+                </td>
+
+                <td>
+                    {{ evento.titulo }}
+                </td>
+
+                <td>
+                    {{ evento.idioma }}
+                </td>
+
+                <td>
+                    {{ evento.usuarios|length }}
+                </td>
+
+               <td>
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+
+        <a href="{{ path('admin_evento_ver', {
+            'id': evento.id
+        }) }}"
+           class="btn btn-info btn-sm">
+            Ver detalle
+        </a>
+
+        <a href="{{ path('admin_evento_editar', {
+            'id': evento.id
+        }) }}"
+           class="btn btn-warning btn-sm">
+            Editar
+        </a>
+
+        <a href="{{ path('admin_evento_inscriptos', {
+            'id': evento.id
+        }) }}"
+           class="btn btn-secondary btn-sm">
+            👥 Inscriptos
+        </a>
+
+        <form method="post"
+              action="{{ path('admin_evento_borrar', {
+                  'id': evento.id
+              }) }}"
+              class="m-0">
+
+            <input type="hidden"
+                   name="_token"
+                   value="{{ csrf_token('delete' ~ evento.id) }}">
+
+            <button type="submit"
+                    class="btn btn-danger btn-sm"
+                    onclick="return confirm('¿Está seguro de eliminar este evento?');">
+                Borrar
+            </button>
+
+        </form>
+
+    </div>
+</td>
+            </tr>
+
+        {% else %}
+
+            <tr>
+                <td colspan="5">
+                    No existe ningún evento.
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <a
+    href="{{ path('admin_evento_nuevo') }}"
+    class="btn btn-success"
+>
+    ➕ Nuevo Evento
+</a>
+
+{% endblock %}
