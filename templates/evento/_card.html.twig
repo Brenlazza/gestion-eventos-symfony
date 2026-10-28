@@ -18,7 +18,21 @@
             <strong>Fecha:</strong>
             {{ evento.fecha|date('d/m/Y') }}
         </p>
+        {% set cuposDisponibles = max(0, evento.capacidad - evento.usuarios|length) %}
 
+<p class="small mb-3">
+    <strong>Cupos disponibles:</strong>
+
+    {% if cuposDisponibles > 0 %}
+        <span class="badge bg-success">
+            {{ cuposDisponibles }}
+        </span>
+    {% else %}
+        <span class="badge bg-danger">
+            Completo
+        </span>
+    {% endif %}
+</p>
         <a href="{{ path('app_evento_detalle', {
             'slug': evento.slug
         }) }}" class="btn btn-primary">

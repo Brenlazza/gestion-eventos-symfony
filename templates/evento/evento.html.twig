@@ -66,42 +66,47 @@
                 </tbody>
             </table>
 
-            <hr>
+                      <hr>
 
-            <h2 class="h5 mb-3">Disertante</h2>
-<div class="mb-4">
+            <div class="mb-4">
 
-    <h2 class="h5 mb-3">Disponibilidad</h2>
+                <h2 class="h5 mb-3">Disponibilidad</h2>
 
-    <a href="{{ path('evento_disponibilidad', {
-        'id': evento.id
-    }) }}"
-       class="btn btn-success">
-        Consultar disponibilidad
-    </a>
-
-</div>
-
-<hr>
-            {% if evento.disertante %}
-
-                <a href="{{ path('app_disertante_detalle', {
-                    'id': evento.disertante.id
+                <a href="{{ path('evento_disponibilidad', {
+                    'id': evento.id
                 }) }}"
-                   class="btn btn-outline-primary">
-
-                    {{ evento.disertante.nombreCompleto }}
-
+                   class="btn btn-success">
+                    Consultar disponibilidad
                 </a>
 
-            {% else %}
+            </div>
 
-                <p class="text-muted">
-                    Sin disertante asignado.
-                </p>
+            <hr>
 
-            {% endif %}
+            <div class="mt-4">
 
+                <h2 class="h5 mb-3">Disertante</h2>
+
+                {% if evento.disertante %}
+
+                    <a href="{{ path('app_disertante_detalle', {
+                        'id': evento.disertante.id
+                    }) }}"
+                       class="btn btn-primary">
+
+                        {{ evento.disertante.nombreCompleto }}
+
+                    </a>
+
+                {% else %}
+
+                    <p class="text-muted">
+                        Sin disertante asignado.
+                    </p>
+
+                {% endif %}
+
+            </div>
         </div>
     </div>
 

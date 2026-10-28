@@ -47,3 +47,46 @@
         </div>
     </div>
 {% endblock %}
+{% block footer %}
+
+    <footer class="bg-dark text-white py-4 mt-5">
+
+        <div class="container text-center">
+
+            <p class="mb-3">
+                Sistema de Gestión de Eventos
+            </p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+
+                <a href="{{ path('app_estatica', {'pagina': 'patrocinadores'}) }}"
+                   class="text-white text-decoration-none">
+                    Patrocinadores
+                </a>
+
+                <a href="{{ path('app_estatica', {'pagina': 'privacidad'}) }}"
+                   class="text-white text-decoration-none">
+                    Privacidad
+                </a>
+
+                <a href="{{ path('app_estatica', {'pagina': 'condiciones'}) }}"
+                   class="text-white text-decoration-none">
+                    Condiciones de uso
+                </a>
+
+                <a href="{{ path('app_estatica', {'pagina': 'licencia'}) }}"
+                   class="text-white text-decoration-none">
+                    Licencia
+                </a>
+
+            </div>
+
+            <p class="text-white-50 small mt-3 mb-0">
+                Proyecto académico desarrollado por Brenda Lazzaroni
+            </p>
+
+        </div>
+
+    </footer>
+
+{% endblock %}
