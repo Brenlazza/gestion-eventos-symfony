@@ -18,6 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     message: 'Ya existe un evento con ese título.',
     errorPath: 'titulo'
 )]
+
 class Evento
 {
     #[ORM\Id]
@@ -26,54 +27,54 @@ class Evento
     private ?int $id = null;
 
    #[ORM\Column(length: 255)]
-#[Assert\NotBlank(
+    #[Assert\NotBlank(
     message: 'El título del evento es obligatorio.'
-)]
-#[Assert\Length(
+    )]
+    #[Assert\Length(
     min: 5,
     max: 255,
     minMessage: 'El título debe tener al menos {{ limit }} caracteres.',
     maxMessage: 'El título no puede superar los {{ limit }} caracteres.'
-)]
-private ?string $titulo = null;
+    )]
+    private ?string $titulo = null;
 
     #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
-#[Assert\NotBlank(
+    #[Assert\NotBlank(
     message: 'Debe ingresar el idioma del evento.'
-)]
-private ?string $idioma = null;
+    )]
+    private ?string $idioma = null;
 
     #[ORM\Column(type: Types::TEXT)]
-#[Assert\NotBlank(
+    #[Assert\NotBlank(
     message: 'Debe ingresar una descripción del evento.'
-)]
-private ?string $descripcion = null;
+    )]
+    private ?string $descripcion = null;
 
-#[ORM\Column(type: Types::DATE_MUTABLE)]
-#[Assert\NotNull(
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull(
     message: 'Debe ingresar la fecha del evento.'
-)]
-private ?\DateTime $fecha = null;
+    )]
+    private ?\DateTime $fecha = null;
 
-#[ORM\Column(type: Types::TIME_MUTABLE)]
-#[Assert\NotNull(
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Assert\NotNull(
     message: 'Debe ingresar la hora del evento.'
-)]
-private ?\DateTime $hora = null;
+    )]
+    private ?\DateTime $hora = null;
 
     #[ORM\Column]
-#[Assert\NotNull(
+    #[Assert\NotNull(
     message: 'Debe ingresar la duración del evento.'
-)]
-#[Assert\Positive(
+    )]
+    #[Assert\Positive(
     message: 'La duración debe ser mayor que cero.'
-)]
-private ?int $duracion = null;
+    )]
 
-    #[ORM\ManyToOne(inversedBy: 'eventos')]
+    private ?int $duracion = null;
+  #[ORM\ManyToOne(inversedBy: 'eventos')]
     private ?Disertante $disertante = null;
 
     /**
@@ -83,15 +84,15 @@ private ?int $duracion = null;
     private Collection $usuarios;
 
    #[ORM\Column]
-#[Assert\NotNull(
+    #[Assert\NotNull(
     message: 'Debe ingresar la capacidad del evento.'
-)]
-#[Assert\Positive(
+    )]
+    #[Assert\Positive(
     message: 'La capacidad debe ser mayor que cero.'
-)]
-private ?int $capacidad = null;
+    )]
+    private ?int $capacidad = null;
 
-    public function __construct()
+    public function __construct() 
     {
         $this->usuarios = new ArrayCollection();
     }
@@ -226,26 +227,26 @@ private ?int $capacidad = null;
         return $this;
     }
     public function getHoraFinalizacion(): \DateTimeInterface
-{
+    {
     $horaFinal = clone $this->hora;
 
     return $horaFinal->add(
         new \DateInterval('PT' . $this->duracion . 'M')
     );
-}
+    }
 
-public function __toString(): string
-{
+    public function __toString(): string
+    {
     return $this->titulo ?? '';
-}
+    }
 
-public function getCapacidad(): ?int
-{
+        public function getCapacidad(): ?int
+    {
     return $this->capacidad;
-}
+    }
 
-public function setCapacidad(int $capacidad): static
-{
+    public function setCapacidad(int $capacidad): static
+    {
     $this->capacidad = $capacidad;
 
     return $this;

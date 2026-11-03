@@ -38,6 +38,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
@@ -172,30 +173,31 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
  
-       }
-       public function getRoles(): array
-{
-    $roles = $this->roles;
+    }
+    
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
 
-    $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_USER';
 
-    return array_unique($roles);
-}
+        return array_unique($roles);
+    }
 
-public function setRoles(array $roles): static
-{
-    $this->roles = $roles;
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
-    return $this;
-}
+        return $this;
+    }
 
-public function getUserIdentifier(): string
-{
-    return (string) $this->email;
-}
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
 
-public function eraseCredentials(): void
-{
+    public function eraseCredentials(): void
+    {
     
 }
 }

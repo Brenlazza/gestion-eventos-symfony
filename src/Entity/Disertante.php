@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: DisertanteRepository::class)]
+
 class Disertante
 {
     #[ORM\Id]
@@ -20,52 +21,55 @@ class Disertante
     private ?int $id = null;
 
    #[ORM\Column(length: 100)]
-#[Assert\NotBlank(
+    #[Assert\NotBlank(
     message: 'El nombre del disertante es obligatorio.'
-)]
-#[Assert\Length(
+    )]
+    #[Assert\Length(
     max: 100,
     maxMessage: 'El nombre no puede superar los {{ limit }} caracteres.'
-)]
-private ?string $nombre = null;
+    )]
+
+    private ?string $nombre = null;
 
    #[ORM\Column(length: 100)]
-#[Assert\NotBlank(
+    #[Assert\NotBlank(
     message: 'El apellido del disertante es obligatorio.'
-)]
-#[Assert\Length(
+    )]
+    #[Assert\Length(
     max: 100,
     maxMessage: 'El apellido no puede superar los {{ limit }} caracteres.'
-)]
-private ?string $apellido = null;
+    )]
 
- #[ORM\Column(length: 255, nullable: true)]
-private ?string $telefono = null;
+    private ?string $apellido = null;
 
-  #[ORM\Column(length: 255, nullable: true)]
-private ?string $url = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $telefono = null;
 
-   #[ORM\Column(length: 180)]
-#[Assert\NotBlank(
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $url = null;
+
+    #[ORM\Column(length: 180)]
+    #[Assert\NotBlank(
     message: 'El correo electrónico es obligatorio.'
-)]
-#[Assert\Email(
+    )]
+    #[Assert\Email(
     message: 'Ingresá una dirección de correo electrónico válida.'
-)]
-#[Assert\Length(
+    )]
+    #[Assert\Length(
     max: 180,
     maxMessage: 'El correo no puede superar los {{ limit }} caracteres.'
-)]
-private ?string $email = null;
+    )]
+
+    private ?string $email = null;
 
    #[ORM\Column(length: 255, nullable: true)]
-private ?string $twitter = null;
+    private ?string $twitter = null;
 
   #[ORM\Column(length: 255, nullable: true)]
-private ?string $linkedin = null;
+    private ?string $linkedin = null;
 
    #[ORM\Column(type: Types::TEXT, nullable: true)]
-private ?string $biografia = null;
+    private ?string $biografia = null;
 
     /**
      * @var Collection<int, Evento>
@@ -73,18 +77,19 @@ private ?string $biografia = null;
     #[ORM\OneToMany(targetEntity: Evento::class, mappedBy: 'disertante')]
     private Collection $eventos;
 
-   #[ORM\Column(length: 150, nullable: true)]
-#[Assert\NotBlank(
+    #[ORM\Column(length: 150, nullable: true)]
+    #[Assert\NotBlank(
     message: 'La especialidad del disertante es obligatoria.'
-)]
-#[Assert\Length(
+    )]
+    #[Assert\Length(
     max: 150,
     maxMessage: 'La especialidad no puede superar los {{ limit }} caracteres.'
-)]
-private ?string $especialidad = null;
+    )]
+
+    private ?string $especialidad = null;
 
    #[ORM\Column]
-private ?bool $activo = true;
+    private ?bool $activo = true;
 
     public function __construct()
     {
@@ -126,11 +131,11 @@ private ?bool $activo = true;
     }
 
   public function setTelefono(?string $telefono): static
-{
+    {
     $this->telefono = $telefono;
 
     return $this;
-}
+    }
 
     public function getUrl(): ?string
     {
@@ -138,11 +143,11 @@ private ?bool $activo = true;
     }
 
    public function setUrl(?string $url): static
-{
+    {
     $this->url = $url;
 
     return $this;
-}
+    }
 
     public function getEmail(): ?string
     {
@@ -162,22 +167,22 @@ private ?bool $activo = true;
     }
 
     public function setTwitter(?string $twitter): static
-{
+    {
     $this->twitter = $twitter;
 
     return $this;
-}
+    }
     public function getLinkedin(): ?string
     {
         return $this->linkedin;
     }
 
    public function setLinkedin(?string $linkedin): static
-{
+    {
     $this->linkedin = $linkedin;
 
     return $this;
-}
+    }
 
     public function getBiografia(): ?string
     {
@@ -185,11 +190,11 @@ private ?bool $activo = true;
     }
 
    public function setBiografia(?string $biografia): static
-{
+    {
     $this->biografia = $biografia;
 
     return $this;
-}
+    }
 
     /**
      * @return Collection<int, Evento>
@@ -220,34 +225,34 @@ private ?bool $activo = true;
         return $this;
     }
     public function getNombreCompleto(): string
-{
+    {
     return trim(($this->nombre ?? '') . ' ' . ($this->apellido ?? ''));
-}
+    }
 
-public function __toString(): string
-{
+    public function __toString(): string
+    {
     return $this->getNombreCompleto();
-}
+    }
 
-public function getEspecialidad(): ?string
-{
+    public function getEspecialidad(): ?string
+    {
     return $this->especialidad;
-}
+    }
 
-public function setEspecialidad(?string $especialidad): static
-{
+    public function setEspecialidad(?string $especialidad): static
+    {
     $this->especialidad = $especialidad;
 
     return $this;
-}
+    }
 
-public function isActivo(): ?bool
-{
+    public function isActivo(): ?bool
+    {
     return $this->activo;
-}
+    }
 
-public function setActivo(bool $activo): static
-{
+    public function setActivo(bool $activo): static
+    {
     $this->activo = $activo;
 
     return $this;

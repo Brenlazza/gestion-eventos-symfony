@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Disertante;
 use App\Form\DisertanteType;
@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/disertantes')]
+
 class AdminDisertanteController extends AbstractController
 {
     #[Route(name: 'app_admin_disertante_index', methods: ['GET'])]
@@ -56,35 +57,40 @@ class AdminDisertanteController extends AbstractController
         $form = $this->createForm(DisertanteType::class, $disertante);
         $form->handleRequest($request);
 
-if ($form->isSubmitted() && $form->isValid()) {
-    $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+     $entityManager->flush();
 
-    $this->addFlash(
+         $this->addFlash(
         'success',
         'Disertante actualizado correctamente.'
-    );
+     );
 
-    return $this->redirectToRoute(
+        return $this->redirectToRoute(
         'app_admin_disertante_index',
         [],
         Response::HTTP_SEE_OTHER
-    );
-}        return $this->render('admin_disertante/edit.html.twig', [
+        );
+        }       
+
+         return $this->render('admin_disertante/edit.html.twig', [
             'disertante' => $disertante,
             'form' => $form,
         ]);
-    }
+ }
 
    #[Route('/{id}', name: 'app_admin_disertante_delete', methods: ['POST'])]
-public function delete(
+
+    public function delete(
     Request $request,
     Disertante $disertante,
     EntityManagerInterface $entityManager
-): Response {
+    ): Response {
+
     if (!$this->isCsrfTokenValid(
         'delete' . $disertante->getId(),
         $request->getPayload()->getString('_token')
     )) {
+        
         $this->addFlash('danger', 'No se pudo validar la solicitud de eliminación.');
 
         return $this->redirectToRoute('app_admin_disertante_index');

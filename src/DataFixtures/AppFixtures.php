@@ -42,7 +42,6 @@ class AppFixtures extends Fixture
         $evento1 = new Evento();
         $evento1
             ->setTitulo('Introducción a Symfony 7')
-            ->setSlug('introduccion-symfony-7')
             ->setIdioma('Español')
             ->setDescripcion('Introducción al desarrollo web con Symfony 7.')
             ->setFecha(new \DateTime('2026-09-10'))
@@ -53,18 +52,16 @@ class AppFixtures extends Fixture
         $evento2 = new Evento();
         $evento2
             ->setTitulo('Doctrine ORM en Symfony')
-            ->setSlug('doctrine-orm-symfony')
             ->setIdioma('Español')
             ->setDescripcion('Relaciones, repositorios y consultas con Doctrine ORM.')
             ->setFecha(new \DateTime('2026-09-12'))
             ->setHora(new \DateTime('19:00'))
             ->setDuracion(120)
-            ->selfetCapacidad(80)
+            ->setCapacidad(80)
             ->setDisertante($disertante2);
         $evento3 = new Evento();
         $evento3
             ->setTitulo('Twig desde cero')
-            ->setSlug('twig-desde-cero')
             ->setIdioma('Español')
             ->setDescripcion('Creación de vistas dinámicas utilizando Twig.')
             ->setFecha(new \DateTime('2026-09-15'))

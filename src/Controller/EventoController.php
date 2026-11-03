@@ -6,7 +6,6 @@ use App\Repository\EventoRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Service\EventoDisponibilidadService;
 use App\Service\EventoResumenService;
 
 class EventoController extends AbstractBaseController
@@ -24,7 +23,7 @@ class EventoController extends AbstractBaseController
 public function evento(
     Request $request,
     EventoRepository $repository
-): Response {
+         ): Response {
     $slug = $request->attributes->get('slug');
 
     $evento = $repository->findOneBy([
@@ -50,11 +49,7 @@ public function evento(
         'evento' => $evento,
     ]);
 }
-#[Route(
-    '/evento/{id}/disponibilidad',
-    name: 'evento_disponibilidad',
-    requirements: ['id' => '\d+']
-)]
+
 #[Route(
     '/evento/{id}/disponibilidad',
     name: 'evento_disponibilidad',

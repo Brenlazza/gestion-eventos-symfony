@@ -26,15 +26,17 @@ class AdminEventoController extends AbstractAdminBaseController
             'eventos' => $eventos,
         ]);
     }
+
     #[Route(
     '/inscriptos/{id}',
     name: 'admin_evento_inscriptos',
     requirements: ['id' => '\d+']
-)]
-public function inscriptos(
+    )]
+
+    public function inscriptos(
     int $id,
     EventoRepository $eventoRepository
-): Response {
+    ): Response {
     $evento = $eventoRepository->find($id);
 
     if (!$evento) {
@@ -49,20 +51,21 @@ public function inscriptos(
             'evento' => $evento,
         ]
     );
-}
-#[Route(
+    }
+
+    #[Route(
     '/borrar/{id}',
     name: 'admin_evento_borrar',
     requirements: ['id' => '\d+'],
      methods: ['POST']
-)]
+    )]
 
-public function borrar(
+    public function borrar(
     int $id,
     Request $request,
     EventoRepository $eventoRepository,
     EntityManagerInterface $entityManager
-): Response {
+    ): Response {
     $evento = $eventoRepository->find($id);
 
     if (!$evento) {
@@ -96,16 +99,18 @@ public function borrar(
     );
 
     return $this->redirectToAdmin();
-}
-#[Route(
+    }
+
+    #[Route(
     '/nuevo',
     name: 'admin_evento_nuevo',
     methods: ['GET', 'POST']
-)]
-public function nuevo(
+    )]
+    
+    public function nuevo(
     Request $request,
     EntityManagerInterface $entityManager
-): Response {
+    ): Response {
     $evento = new Evento();
 
     $form = $this->createForm(
@@ -133,17 +138,18 @@ public function nuevo(
             'form' => $form,
         ]
     );
-}
-#[Route(
+    }
+
+    #[Route(
     '/ver/{id}',
     name: 'admin_evento_ver',
     requirements: ['id' => '\d+'],
     methods: ['GET']
-)]
-public function ver(
+    )]
+    public function ver(
     int $id,
     EventoRepository $eventoRepository
-): Response {
+    ): Response {
     $evento = $eventoRepository->find($id);
 
     if (!$evento) {
@@ -158,21 +164,20 @@ public function ver(
             'evento' => $evento,
         ]
     );
-}
-#[Route(
+    }
+
+    #[Route(
     '/editar/{id}',
     name: 'admin_evento_editar',
     requirements: ['id' => '\d+'],
     methods: ['GET', 'POST']
-)]
-public function editar(
+    )]
+    public function editar(
     int $id,
     Request $request,
     EventoRepository $eventoRepository,
     EntityManagerInterface $entityManager
-): Response {
-
-    // Buscar el evento existente
+    ): Response {
     $evento = $eventoRepository->find($id);
 
     if (!$evento) {
@@ -181,16 +186,14 @@ public function editar(
         );
     }
 
-    // Crear el formulario con los datos del evento
     $form = $this->createForm(
         EventoType::class,
         $evento
     );
 
-    // Procesar la petición
+    
     $form->handleRequest($request);
 
-    // Guardar los cambios si el formulario es válido
     if ($form->isSubmitted() && $form->isValid()) {
 
         $entityManager->flush();
@@ -202,7 +205,7 @@ public function editar(
         return $this->redirectToAdmin();
     }
 
-    // Mostrar el formulario
+    
     return $this->render(
         'admin/evento/editar.html.twig',
         [

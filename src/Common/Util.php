@@ -13,13 +13,13 @@ class Util
     }
 
     public static function slugify(string $texto): string
-{
+    {
     $texto = iconv('UTF-8', 'ASCII//TRANSLIT', $texto);
     $texto = strtolower($texto);
     $texto = preg_replace('/[^a-z0-9]+/', '-', $texto);
 
     return trim($texto, '-');
-}
+    }
     /**
      * Convierte un texto a mayúsculas.
      */

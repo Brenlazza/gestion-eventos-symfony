@@ -23,7 +23,7 @@ class DefaultController extends AbstractBaseController{
 
     #[Route('/', name: 'app_portada')]
     public function portada(EntityManagerInterface $entityManager): Response
-{
+    {
     $eventos = $entityManager
         ->getRepository(Evento::class)
         ->findAll();

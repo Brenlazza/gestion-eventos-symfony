@@ -21,68 +21,68 @@ class DisertanteType extends AbstractType
     'attr' => [
         'placeholder' => 'Ingresá el nombre del disertante',
     ],
-])
-->add('apellido', null, [
+    ])
+    ->add('apellido', null, [
     'label' => 'Apellido',
     'attr' => [
         'placeholder' => 'Ingresá el apellido del disertante',
     ],
-])           
-->add('telefono', null, [
+    ])           
+    ->add('telefono', null, [
     'label' => 'Teléfono',
     'required' => false,
     'attr' => [
         'placeholder' => 'Ingresá un teléfono de contacto',
     ],
-])
+    ])
 
-->add('url', null, [
+    ->add('url', null, [
     'label' => 'Página web',
     'required' => false,
     'attr' => [
         'placeholder' => 'https://ejemplo.com',
     ],
-])
-->add('email', EmailType::class, [
+    ])
+    ->add('email', EmailType::class, [
     'label' => 'Correo electrónico',
     'attr' => [
         'placeholder' => 'ejemplo@correo.com',
     ],
-])           
+    ])           
 
-->add('twitter', null, [
+    ->add('twitter', null, [
     'label' => 'Twitter / X',
     'required' => false,
     'attr' => [
         'placeholder' => '@usuario',
     ],
-])            
+    ])            
 
-->add('linkedin', null, [
+    ->add('linkedin', null, [
     'label' => 'LinkedIn',
     'required' => false,
     'attr' => [
         'placeholder' => 'https://linkedin.com/in/usuario',
     ],
-])
-->add('biografia', TextareaType::class, [
+    ])
+    ->add('biografia', TextareaType::class, [
     'label' => 'Biografía',
     'required' => false,
     'attr' => [
         'placeholder' => 'Escribí una breve descripción del disertante',
         'rows' => 5,
     ],
-])->add('especialidad', null, [
+    ])->add('especialidad', null, [
     'label' => 'Especialidad',
     'attr' => [
         'placeholder' => 'Ejemplo: Desarrollo web',
         'maxlength' => 150,
     ],
-])            
-->add('activo', CheckboxType::class, [
+    ])            
+    ->add('activo', CheckboxType::class, [
     'label' => 'Disertante activo',
     'required' => false,
-])        ;
+    ])        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -15,6 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
     name: 'app:crear-admin',
     description: 'Crea un usuario administrador'
 )]
+
 class CrearAdminCommand extends Command
 {
     public function __construct(
@@ -59,7 +60,7 @@ class CrearAdminCommand extends Command
     $io->success('Contraseña actualizada correctamente.');
 
     return Command::SUCCESS;
-}
+    }
 
         // Solicitar la contraseña sin mostrarla en pantalla.
         $password = $io->askHidden('Contraseña del administrador');
